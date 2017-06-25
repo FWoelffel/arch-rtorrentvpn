@@ -38,17 +38,14 @@ aor_packages="rtorrent"
 # call aor script (arch official repo)
 source /root/aor.sh
 
-# aur packages
-####
-
-# define aur packages
-aur_packages="rutorrent"
-
-# call aur install script (arch user repo)
-source /root/aur.sh
-
 # call custom install script
 source /root/custom.sh
+
+# Cloning the ruTorrent repository
+git clone https://github.com/Novik/ruTorrent.git /usr/share/webapps/rutorrent
+ln -s /usr/share/webapps/rutorrent /etc/webapps/rutorrent
+# Also adding the MaterialDesign theme
+git clone https://github.com/Phlooo/ruTorrent-MaterialDesign.git /usr/share/webapps/rutorrent/plugins/theme/themes/MaterialDesign
 
 # config - php
 ####
@@ -275,7 +272,7 @@ if [[ $VPN_ENABLED == "yes" ]]; then
 		echo "[warn] ENABLE_FLOOD not defined (via -e ENABLE_FLOOD), defaulting to 'no'" | ts '%Y-%m-%d %H:%M:%.S'
 		export ENABLE_FLOOD="no"
 	fi
-	
+
 elif [[ $VPN_ENABLED == "no" ]]; then
 	echo "[warn] !!IMPORTANT!! You have set the VPN to disabled, you will NOT be secure!" | ts '%Y-%m-%d %H:%M:%.S'
 fi
